@@ -4,6 +4,66 @@ An interactive knowledge graph of the AI R&D team's initiatives, POC versions, r
 findings and resources. It tracks **code** and **validation** progress independently, and the backend
 calculates both.
 
+![The graph workspace with Voice AI and RAG Engine expanded](docs/screenshots/02-graph-expanded.png)
+
+## Screenshots
+
+### Graph: the landing view
+The team root shows importance-weighted progress across active POCs. Each POC and version node has two
+independent rings: **code** (teal, outer) and **validation** (amber, inner). The badges show importance
+weight (×3) and blocked deliverables (⚠).
+
+![Graph overview](docs/screenshots/01-graph-overview.png)
+
+### Inspecting a version
+The first click on a node expands it, and the next click opens its details. The panel shows
+backend-calculated progress, a per-deliverable breakdown and any blockers, while the graph stays visible
+and the selected node's neighbourhood is highlighted.
+
+![Details panel](docs/screenshots/03-details-panel.png)
+
+### Deliverables editor
+Each deliverable has a weight, a completion state, evidence, a blocked flag, an N/A flag and a
+verification exception. **Verified** stays disabled until evidence is attached. Evidence from the
+previous version can be explicitly accepted into the new one.
+
+![Deliverables](docs/screenshots/04-deliverables.png)
+
+### Versions and comparison
+Every version is scored independently. Historical versions stay accessible and read-only, and the
+comparison table shows how each deliverable evolved.
+
+![Versions](docs/screenshots/05-versions.png)
+
+### Presentation mode
+The whole research ecosystem fully expanded, with toolbars and navigation hidden, for leadership reviews.
+
+![Presentation mode](docs/screenshots/06-presentation.png)
+
+### Initiatives table
+A sortable, filterable table for readers who prefer rows to a graph. Research outcome is shown
+separately from progress.
+
+![Initiatives](docs/screenshots/07-initiatives.png)
+
+### Activity and management overview
+Team progress trend, POC comparison, research outcomes, blocked initiatives and a filterable activity
+feed.
+
+![Activity and overview](docs/screenshots/08-activity.png)
+
+### Experiments
+Objective, configuration, metrics and conclusions for each experiment, with a cross-experiment metric
+comparison.
+
+![Experiments](docs/screenshots/09-experiments.png)
+
+### Research Library
+One canonical record per paper, document, repository or finding, linked to every initiative and version
+that uses it.
+
+![Research Library](docs/screenshots/10-library.png)
+
 ## Run it
 
 ```bash

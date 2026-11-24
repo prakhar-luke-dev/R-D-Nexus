@@ -30,6 +30,8 @@ import { VersionNode } from "./nodes/VersionNode";
 import { useGraphUI } from "./store";
 
 const PANEL_WIDTH = 480;
+// xyflow v13 reads a bare number as pixels; leave room for the toolbar/HUD (top) and controls.
+const FIT_PADDING = { top: "150px", bottom: "48px", left: "48px", right: "48px" } as const;
 
 const nodeTypes = {
   team: TeamNode,
@@ -109,7 +111,7 @@ export function GraphCanvas({ graph }: { graph: Graph }) {
       });
       if (outside) {
         const parents = new Set(ids.flatMap((id) => idx.parents.get(id) ?? []).filter((p) => visible.has(p)));
-        rf.fitView({ nodes: [...ids, ...parents].map((id) => ({ id })), padding: 0.25, maxZoom: 1, duration: 500 });
+        rf.fitView({ nodes: [...ids, ...parents].map((id) => ({ id })), padding: FIT_PADDING, maxZoom: 1, duration: 500 });
       }
     },
     [rf, idx, positionOf, visible],
@@ -127,7 +129,7 @@ export function GraphCanvas({ graph }: { graph: Graph }) {
       window.setTimeout(() => setAnimating(false), 520);
       if (firstLayout.current) {
         firstLayout.current = false;
-        requestAnimationFrame(() => rf.fitView({ padding: 0.35, maxZoom: 1, duration: 0 }));
+        requestAnimationFrame(() => rf.fitView({ padding: FIT_PADDING, maxZoom: 1, duration: 0 }));
       } else if (appeared.length) {
         // Keep the newly revealed branch on screen without resetting the user's view.
         window.setTimeout(() => ensureVisible(appeared, pos), 60);
@@ -263,7 +265,7 @@ export function GraphCanvas({ graph }: { graph: Graph }) {
       () =>
         rf.fitView({
           nodes: fitRequest.ids?.map((id) => ({ id })),
-          padding: 0.3,
+          padding: FIT_PADDING,
           maxZoom: 1,
           duration: 500,
         }),

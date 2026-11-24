@@ -26,6 +26,8 @@ import { RelationshipDialog } from "../dialogs/RelationshipDialog";
 import { indexGraph, pathToRoot } from "./model";
 import { activeFilterCount, useGraphUI } from "./store";
 
+const FIT_PADDING = { top: "150px", bottom: "48px", left: "48px", right: "48px" } as const;
+
 const FILTER_TYPES: NodeType[] = ["POC", "VERSION", "RESEARCH", "EXPERIMENT", "FINDING", "PAPER", "DOCUMENTATION", "CODE", "DEMO"];
 const FILTER_STATUSES: NodeStatus[] = ["PLANNED", "IN_PROGRESS", "BLOCKED", "ON_HOLD", "COMPLETED", "HISTORICAL"];
 const FILTER_RELS: Relationship[] = ["DERIVED_FROM", "REFERENCES", "SHARES_RESOURCE", "PRODUCED", "CONTAINS"];
@@ -125,7 +127,7 @@ export function ZoomControls() {
     <div className="flex flex-col overflow-hidden rounded-xl border border-border bg-surface/90 shadow-lg shadow-black/30 backdrop-blur">
       <button className="p-2 text-muted hover:bg-surface-2 hover:text-text" onClick={() => rf.zoomIn({ duration: 200 })} title="Zoom in" aria-label="Zoom in"><ZoomIn className="h-4 w-4" /></button>
       <button className="border-t border-border p-2 text-muted hover:bg-surface-2 hover:text-text" onClick={() => rf.zoomOut({ duration: 200 })} title="Zoom out" aria-label="Zoom out"><ZoomOut className="h-4 w-4" /></button>
-      <button className="border-t border-border p-2 text-muted hover:bg-surface-2 hover:text-text" onClick={() => rf.fitView({ padding: 0.3, maxZoom: 1, duration: 400 })} title="Fit" aria-label="Fit view"><Maximize className="h-4 w-4" /></button>
+      <button className="border-t border-border p-2 text-muted hover:bg-surface-2 hover:text-text" onClick={() => rf.fitView({ padding: FIT_PADDING, maxZoom: 1, duration: 400 })} title="Fit" aria-label="Fit view"><Maximize className="h-4 w-4" /></button>
     </div>
   );
 }
