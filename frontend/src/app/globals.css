@@ -1,0 +1,167 @@
+@import "tailwindcss";
+@import "@xyflow/react/dist/style.css";
+
+/* R&D Nexus design tokens: dark-first, restrained. */
+:root {
+  --bg: #07090d;
+  --bg-elev: #0c1016;
+  --surface: #11161e;
+  --surface-2: #161c26;
+  --surface-3: #1d2430;
+  --border: #222a36;
+  --border-strong: #2f3a4a;
+  --text: #e6e9ef;
+  --text-muted: #9aa4b2;
+  --text-faint: #6b7686;
+  --accent: #7c8cff;
+
+  /* The two progress dimensions: identical everywhere in the app. */
+  --code: #2dd4bf; /* teal */
+  --code-dim: rgba(45, 212, 191, 0.16);
+  --validation: #f5b544; /* amber */
+  --validation-dim: rgba(245, 181, 68, 0.16);
+  /* Chart-mark steps of the same hues, validated for the dark chart surface (dataviz lightness band). */
+  --chart-code: #0f9e8d;
+  --chart-validation: #c98428;
+  --chart-single: #6f7fe8;
+  --chart-grid: #1f2733;
+
+  --ok: #4ade80;
+  --warn: #f5b544;
+  --danger: #f87171;
+  --info: #60a5fa;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-accent: var(--accent);
+  --color-code: var(--code);
+  --color-validation: var(--validation);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-mono);
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+::selection {
+  background: rgba(124, 140, 255, 0.35);
+}
+
+/* --- React Flow theming ------------------------------------------------------------------ */
+.react-flow {
+  --xy-background-color: transparent;
+  --xy-edge-stroke: #3a4556;
+  --xy-edge-stroke-selected: #c7cfdc;
+  --xy-handle-background-color: var(--surface-3);
+  --xy-handle-border-color: var(--border-strong);
+  --xy-controls-button-background-color: var(--surface);
+  --xy-controls-button-background-color-hover: var(--surface-2);
+  --xy-controls-button-color: var(--text-muted);
+  --xy-controls-button-border-color: var(--border);
+  --xy-minimap-background-color: var(--bg-elev);
+  --xy-minimap-mask-background-color: rgba(7, 9, 13, 0.7);
+  --xy-attribution-background-color: transparent;
+}
+
+.react-flow__attribution {
+  display: none;
+}
+
+.react-flow__node {
+  transition: opacity 220ms ease;
+}
+
+/* Glide existing nodes to their new positions when a branch expands or collapses. */
+.rf-animate .react-flow__node {
+  transition:
+    transform 480ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 220ms ease;
+}
+
+.rf-animate .react-flow__edge-path {
+  transition: d 480ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Fade/scale in when a branch expands. */
+.rf-node-enter {
+  animation: node-enter 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes node-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.react-flow__edge.dimmed,
+.react-flow__node.dimmed {
+  opacity: 0.18;
+}
+
+.react-flow__handle {
+  width: 7px;
+  height: 7px;
+  opacity: 0;
+  transition: opacity 150ms;
+}
+
+.react-flow__node:hover .react-flow__handle,
+.connect-mode .react-flow__handle {
+  opacity: 1;
+}
+
+.connect-mode .react-flow__handle {
+  width: 11px;
+  height: 11px;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.edge-animated {
+  stroke-dasharray: 5 5;
+  animation: dash 1.2s linear infinite;
+}
+
+.bg-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.045) 1px, transparent 0);
+  background-size: 22px 22px;
+}

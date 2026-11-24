@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+backend/rdnexus.db
+backend/uploads/
+.env
+
+# Node / Next
+node_modules/
+frontend/.next/
+frontend/.next-build/
+frontend/next-env.d.ts
+*.tsbuildinfo
+
+.DS_Store

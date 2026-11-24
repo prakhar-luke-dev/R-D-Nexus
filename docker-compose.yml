@@ -1,0 +1,18 @@
+# Optional PostgreSQL for the API. The app defaults to SQLite; to use this:
+#   docker compose up -d
+#   cd backend && uv add 'psycopg[binary]'
+#   export RDN_DATABASE_URL=postgresql+psycopg://rdnexus:rdnexus@localhost:5432/rdnexus
+#   uv run alembic upgrade head && uv run python -m app.seed
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: rdnexus
+      POSTGRES_PASSWORD: rdnexus
+      POSTGRES_DB: rdnexus
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
